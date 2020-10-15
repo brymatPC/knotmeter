@@ -1,0 +1,10 @@
+[LAGER]
+
+[DEVENV]
+image = lagerdata/devenv-cortexm-stm32
+mount_dir = /github/workspace
+shell = /bin/bash
+cmd.build = headless-build.sh -build knotmeter -importAll /github/workspace
+cmd.clean-debug = rm -rf Debug
+cmd.clean = cd /github/workspace;rm -rf Debug;rm -rf Test;rm -rf Release
+cmd.connect-stm = lager connect --device stm32l0 --interface stlink --transport hla_swd --speed 480
