@@ -8,4 +8,6 @@ cmd.build = headless-build.sh -build knotmeter -importAll /github/workspace
 cmd.clean-debug = rm -rf Debug
 cmd.clean = cd /github/workspace;rm -rf Debug;rm -rf Test;rm -rf Release
 cmd.connect-stm = lager connect --device stm32l0 --interface stlink --transport hla_swd --speed 480
-cmd.setup = docker run -it --rm -v C:\Users\bryma\.lager:/home/appuser/.lager  lagerdata/lager-cli:v0.1.45 lager uart --interactive --serial-device /dev/ttyACM0
+cmd.flash2 = lager flash --hexfile Release/knotmeter.hex; lager run
+cmd.term = lager uart --serial-device /dev/ttyACM0 --interactive
+
