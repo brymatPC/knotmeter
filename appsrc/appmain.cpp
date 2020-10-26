@@ -5,18 +5,18 @@
 
 #include "appmain.h"
 
-//YRSmallShell shell1;
+YRSmallShell shell1;
 BufferedSerial BSerial2(usartHandler(2));
 static CircularQ<uint32_t, 256> m_captureQ;
-static CircularQ<char, 16> debugInQ;
-static CircularQ<char, 1024> m_loggerQ;
+//static CircularQ<char, 16> debugInQ;
+//static CircularQ<char, 1024> m_loggerQ;
 
 void log(char *buf, uint16_t length) {
-	if( m_loggerQ.spaceAvailable( length) ) {
-		for( uint16_t i = 0; i < length; i++) {
-			m_loggerQ.put( buf[i]);
-		}
-	}
+//	if( m_loggerQ.spaceAvailable( length) ) {
+//		for( uint16_t i = 0; i < length; i++) {
+//			m_loggerQ.put( buf[i]);
+//		}
+//	}
 }
 
 void appmainSlice(void) {
@@ -30,8 +30,8 @@ extern "C" void runApp( ) {
 	//BootStatus::logBootStatus();
 
 	BSerial2.begin(115200);
-//	BSerial2.init(shell1.getInq(), shell1.getOutq());
-	BSerial2.init(debugInQ, m_loggerQ);
+	BSerial2.init(shell1.getInq(), shell1.getOutq());
+//	BSerial2.init(debugInQ, m_loggerQ);
 
 	__HAL_RCC_TIM2_CLK_ENABLE();
 	TIM_HandleTypeDef *timer = timHandler(2);
